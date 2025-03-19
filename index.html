@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Generator</title>
+  <style>
+    /* Basic styling for the password generator */
+    body {
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Password Generator</h1>
+    <input type="text" id="password" readonly placeholder="Your generated password">
+    <br>
+    <button id="generate-btn" onclick="createPassword()">Generate Password</button>
+  </div>
+
+  <script>
+    const passwordBox = document.getElementById("password");
+    const length = 12;
+
+    const upperCase = "ABCDEFGHIJKLMNOPQRSTUWYZ";
+    const lowerCase = "abcdefghijklmnopqrstuwz";
+    const number = "0123456789";
+    const symbol = "!@#$%^&*().,:;><?";
+
+    const allChars = upperCase + lowerCase + number + symbol;
+
+    function createPassword(){
+        let password = "";
+        password += upperCase[Math.floor(Math.random() * upperCase.length)];
+        password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+        password += number[Math.floor(Math.random() * number.length)];
+        password += symbol[Math.floor(Math.random() * symbol.length)];
+
+        while(length > password.length){
+            password += allChars[Math.floor(Math.random() * allChars.length)];
+        }
+
+        passwordBox.value = password;
+    }
+
+  </script>
+  
+</body>
+</html>
